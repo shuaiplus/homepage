@@ -1,0 +1,4 @@
+<!-- 由于favicon.ico是二进制文件，我们无法在这里直接编辑。
+通常，favicon需要通过图像编辑工具创建，然后转换为.ico格式。
+可以使用logo.png作为网站的图标，暂时我们在index.html中已设置了favicon引用。
+可以稍后使用在线工具将logo.png转换为favicon.ico。 --> 
