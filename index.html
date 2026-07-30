@@ -1,232 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <title>个人主页</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f04f36">
+    <meta name="description" content="shuaiplus 的开源作品主页">
+    <title>SHUAI.PLUS · Open-source creator</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
-    <!-- GitHub按钮 -->
-    <a href="https://github.com/shuaiplus" target="_blank" class="github-button">
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 98">
-                <path
-                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
-                clip-rule="evenodd"
-                fill-rule="evenodd"
-                ></path>
-            </svg>
-        </button>
-    </a>
-    
-    <!-- 液态玻璃效果 -->
-    <div class="glass-effect">
-        <svg class="filter" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="glass-filter" color-interpolation-filters="sRGB">
-                    <!-- 输入位移图像 -->
-                    <feImage x="0" y="0" width="100%" height="100%" result="map"></feImage>
-                    <!-- 色彩通道位移 -->
-                    <!-- RED通道 (最强位移) -->
-                    <feDisplacementMap in="SourceGraphic" in2="map" id="redchannel" 
-                        xChannelSelector="R" yChannelSelector="G" result="dispRed" />
-                    <feColorMatrix in="dispRed" type="matrix" 
-                        values="1 0 0 0 0
-                                0 0 0 0 0
-                                0 0 0 0 0
-                                0 0 0 1 0" result="red" />
-                    <!-- GREEN通道 (参考/最小位移) -->
-                    <feDisplacementMap in="SourceGraphic" in2="map" id="greenchannel" 
-                        xChannelSelector="R" yChannelSelector="G" result="dispGreen" />
-                    <feColorMatrix in="dispGreen" type="matrix" 
-                        values="0 0 0 0 0
-                                0 1 0 0 0
-                                0 0 0 0 0
-                                0 0 0 1 0" result="green" />
-                    <!-- BLUE通道 (中等位移) -->
-                    <feDisplacementMap in="SourceGraphic" in2="map" id="bluechannel" 
-                        xChannelSelector="R" yChannelSelector="G" result="dispBlue" />
-                    <feColorMatrix in="dispBlue" type="matrix" 
-                        values="0 0 0 0 0
-                                0 0 0 0 0
-                                0 0 1 0 0
-                                0 0 0 1 0" result="blue" />
-                    <!-- 混合通��� -->
-                    <feBlend in="red" in2="green" mode="screen" result="rg" />
-                    <feBlend in="rg" in2="blue" mode="screen" result="output" />
-                    <!-- 输出模糊 -->
-                    <feGaussianBlur in="output" stdDeviation="0.7" />
-                </filter>
-            </defs>
-        </svg>
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="wild-shape wild-shape-one" aria-hidden="true"></div>
+    <div class="wild-shape wild-shape-two" aria-hidden="true"></div>
+    <div class="background-word" aria-hidden="true">OPEN</div>
+
+    <div class="top-marquee" aria-hidden="true">
+        <div class="top-marquee-track">
+            <span>BUILD IT · BREAK IT · OPEN SOURCE IT · STAY CURIOUS · </span>
+            <span>BUILD IT · BREAK IT · OPEN SOURCE IT · STAY CURIOUS · </span>
+        </div>
     </div>
-    
-    <div class="container"></div>
-    <main class="content">
-        <header class="header">
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1 class="title">shuai</h1>
-        </header>
 
-        <section class="projects">    
-            <!-- Project 1: NodeCrypt -->
-            <div class="project-wrapper noselect">
-                <a href="https://github.com/shuaiplus/NodeCrypt" target="_blank" class="project-link">
-                    <div class="project-canvas">
-                        <div class="tracker tr-1"></div>
-                        <div class="tracker tr-2"></div>
-                        <div class="tracker tr-3"></div>
-                        <div class="tracker tr-4"></div>
-                        <div class="tracker tr-5"></div>
-                        <div class="tracker tr-6"></div>
-                        <div class="tracker tr-7"></div>
-                        <div class="tracker tr-8"></div>
-                        <div class="tracker tr-9"></div>
-                        <div class="tracker tr-10"></div>
-                        <div class="tracker tr-11"></div>
-                        <div class="tracker tr-12"></div>
-                        <div class="tracker tr-13"></div>
-                        <div class="tracker tr-14"></div>
-                        <div class="tracker tr-15"></div>
-                        <div class="tracker tr-16"></div>
-                        <div class="tracker tr-17"></div>
-                        <div class="tracker tr-18"></div>
-                        <div class="tracker tr-19"></div>
-                        <div class="tracker tr-20"></div>
-                        <div class="tracker tr-21"></div>
-                        <div class="tracker tr-22"></div>
-                        <div class="tracker tr-23"></div>
-                        <div class="tracker tr-24"></div>
-                        <div class="tracker tr-25"></div>
-                        <div class="project-card">
-                            <h2>NodeCrypt</h2>
-                            <h3>在线端到端加密聊天室</h3>
-                            <p>开源地址：github.com/shuaiplus/NodeCrypt</p>
-                        </div>
-                    </div>
-                </a>
+    <header class="site-header">
+        <span class="edition">SHUAIPLUS / SELECTED WORKS / 2026</span>
+        <a class="github-button" href="https://github.com/shuaiplus" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.48 2 2 6.6 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.05-.02-1.91-2.78.62-3.37-1.21-3.37-1.21-.46-1.19-1.11-1.51-1.11-1.51-.91-.64.07-.62.07-.62 1 .08 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.66.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.35 9.35 0 0 1 12 6.69c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.26C22 6.6 17.52 2 12 2Z"/>
+            </svg>
+            <span>GITHUB</span>
+            <b aria-hidden="true">↗</b>
+        </a>
+    </header>
+
+    <main class="hero-shell">
+        <section class="maker" aria-labelledby="brand-title">
+            <div class="brand-wrap">
+                <span class="brand-kicker">THE AMAZING</span>
+                <h1 class="brand" id="brand-title">SHUAI<span>.</span>PLUS</h1>
+                <span class="brand-volume">VOL. 01</span>
             </div>
 
-            <!-- Project 2: NodeVision -->
-            <div class="project-wrapper noselect">
-                <a href="https://github.com/shuaiplus/NodeVision" target="_blank" class="project-link">
-                    <div class="project-canvas">
-                        <div class="tracker tr-1"></div>
-                        <div class="tracker tr-2"></div>
-                        <div class="tracker tr-3"></div>
-                        <div class="tracker tr-4"></div>
-                        <div class="tracker tr-5"></div>
-                        <div class="tracker tr-6"></div>
-                        <div class="tracker tr-7"></div>
-                        <div class="tracker tr-8"></div>
-                        <div class="tracker tr-9"></div>
-                        <div class="tracker tr-10"></div>
-                        <div class="tracker tr-11"></div>
-                        <div class="tracker tr-12"></div>
-                        <div class="tracker tr-13"></div>
-                        <div class="tracker tr-14"></div>
-                        <div class="tracker tr-15"></div>
-                        <div class="tracker tr-16"></div>
-                        <div class="tracker tr-17"></div>
-                        <div class="tracker tr-18"></div>
-                        <div class="tracker tr-19"></div>
-                        <div class="tracker tr-20"></div>
-                        <div class="tracker tr-21"></div>
-                        <div class="tracker tr-22"></div>
-                        <div class="tracker tr-23"></div>
-                        <div class="tracker tr-24"></div>
-                        <div class="tracker tr-25"></div>
-                        <div class="project-card">
-                            <h2>NodeVision</h2>
-                            <h3>变幻莫测的视觉效应</h3>
-                            <p>开源地址：github.com/shuaiplus/NodeVision</p>
-                        </div>
-                    </div>
-                </a>
+            <div class="maker-portrait">
+                <div class="avatar-orbit" aria-hidden="true"></div>
+                <div class="avatar-frame">
+                    <img src="logo.png" alt="shuaiplus 的头像">
+                </div>
+                <div class="hello-burst" aria-hidden="true">HELLO<br>WORLD!</div>
+                <span class="maker-label">INDEPENDENT BUILDER</span>
             </div>
 
-            <!-- Project 3: NodeWarden -->
-            <div class="project-wrapper noselect">
-                <a href="https://github.com/shuaiplus/NodeWarden" target="_blank" class="project-link">
-                    <div class="project-canvas">
-                        <div class="tracker tr-1"></div>
-                        <div class="tracker tr-2"></div>
-                        <div class="tracker tr-3"></div>
-                        <div class="tracker tr-4"></div>
-                        <div class="tracker tr-5"></div>
-                        <div class="tracker tr-6"></div>
-                        <div class="tracker tr-7"></div>
-                        <div class="tracker tr-8"></div>
-                        <div class="tracker tr-9"></div>
-                        <div class="tracker tr-10"></div>
-                        <div class="tracker tr-11"></div>
-                        <div class="tracker tr-12"></div>
-                        <div class="tracker tr-13"></div>
-                        <div class="tracker tr-14"></div>
-                        <div class="tracker tr-15"></div>
-                        <div class="tracker tr-16"></div>
-                        <div class="tracker tr-17"></div>
-                        <div class="tracker tr-18"></div>
-                        <div class="tracker tr-19"></div>
-                        <div class="tracker tr-20"></div>
-                        <div class="tracker tr-21"></div>
-                        <div class="tracker tr-22"></div>
-                        <div class="tracker tr-23"></div>
-                        <div class="tracker tr-24"></div>
-                        <div class="tracker tr-25"></div>
-                        <div class="project-card">
-                            <h2>NodeWarden</h2>
-                            <h3>运行在 Cloudflare Workers 上的 Bitwarden 第三方服务端</h3>
-                            <p>开源地址：github.com/shuaiplus/NodeWarden</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <p class="slogan">
+                把脑海里的<br>
+                <mark>“要是有这个就好了”</mark><br>
+                变成开源作品！
+            </p>
 
-            <!-- Project 4: Inkstone -->
-            <div class="project-wrapper noselect">
-                <a href="https://github.com/shuaiplus/inkstone" target="_blank" class="project-link">
-                    <div class="project-canvas">
-                        <div class="tracker tr-1"></div>
-                        <div class="tracker tr-2"></div>
-                        <div class="tracker tr-3"></div>
-                        <div class="tracker tr-4"></div>
-                        <div class="tracker tr-5"></div>
-                        <div class="tracker tr-6"></div>
-                        <div class="tracker tr-7"></div>
-                        <div class="tracker tr-8"></div>
-                        <div class="tracker tr-9"></div>
-                        <div class="tracker tr-10"></div>
-                        <div class="tracker tr-11"></div>
-                        <div class="tracker tr-12"></div>
-                        <div class="tracker tr-13"></div>
-                        <div class="tracker tr-14"></div>
-                        <div class="tracker tr-15"></div>
-                        <div class="tracker tr-16"></div>
-                        <div class="tracker tr-17"></div>
-                        <div class="tracker tr-18"></div>
-                        <div class="tracker tr-19"></div>
-                        <div class="tracker tr-20"></div>
-                        <div class="tracker tr-21"></div>
-                        <div class="tracker tr-22"></div>
-                        <div class="tracker tr-23"></div>
-                        <div class="tracker tr-24"></div>
-                        <div class="tracker tr-25"></div>
-                        <div class="project-card">
-                            <h2>Inkstone</h2>
-                            <h3>部署在 Cloudflare workers 上的全能 Markdown 笔记。</h3>
-                            <p>开源地址：github.com/shuaiplus/inkstone</p>
-                        </div>
+            <div class="maker-meta">
+                <span>OPEN SOURCE</span>
+                <i></i>
+                <span>MADE IN CHINA</span>
+            </div>
+        </section>
+
+        <section class="works" aria-labelledby="works-title">
+            <header class="works-header">
+                <div>
+                    <span>01—04 / ACTIVE PROJECTS</span>
+                    <h2 id="works-title">正在生长的作品</h2>
+                </div>
+                <div class="live-status"><i></i> ALL SYSTEMS OPEN</div>
+            </header>
+
+            <div class="project-grid">
+                <a class="project-card project-lime" href="https://github.com/shuaiplus/NodeCrypt" target="_blank" rel="noreferrer">
+                    <span class="project-index">01</span>
+                    <span class="project-code" aria-hidden="true">NC</span>
+                    <div class="project-copy">
+                        <h3>NodeCrypt</h3>
+                        <p>在线端到端加密聊天室</p>
                     </div>
+                    <span class="project-open">OPEN REPO <b>↗</b></span>
+                </a>
+
+                <a class="project-card project-violet" href="https://github.com/shuaiplus/NodeVision" target="_blank" rel="noreferrer">
+                    <span class="project-index">02</span>
+                    <span class="project-code" aria-hidden="true">NV</span>
+                    <div class="project-copy">
+                        <h3>NodeVision</h3>
+                        <p>变幻莫测的视觉效应</p>
+                    </div>
+                    <span class="project-open">OPEN REPO <b>↗</b></span>
+                </a>
+
+                <a class="project-card project-yellow" href="https://github.com/shuaiplus/NodeWarden" target="_blank" rel="noreferrer">
+                    <span class="project-index">03</span>
+                    <span class="project-code" aria-hidden="true">NW</span>
+                    <div class="project-copy">
+                        <h3>NodeWarden</h3>
+                        <p>运行在 Cloudflare Workers 上的 Bitwarden 第三方服务端</p>
+                    </div>
+                    <span class="project-open">OPEN REPO <b>↗</b></span>
+                </a>
+
+                <a class="project-card project-sky" href="https://github.com/shuaiplus/inkstone" target="_blank" rel="noreferrer">
+                    <span class="project-index">04</span>
+                    <span class="project-code" aria-hidden="true">IK</span>
+                    <div class="project-copy">
+                        <h3>Inkstone</h3>
+                        <p>部署在 Cloudflare Workers 上的全能 Markdown 笔记</p>
+                    </div>
+                    <span class="project-open">OPEN REPO <b>↗</b></span>
                 </a>
             </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <aside class="wild-stamp" aria-hidden="true">
+        <span>100%</span>
+        <strong>HAND<br>CRAFTED</strong>
+    </aside>
+
+    <footer class="bottom-strip">
+        <span>SHUAI.PLUS</span>
+        <span>DESIGN × CODE × CURIOSITY</span>
+        <span>KEEP BUILDING →</span>
+    </footer>
+
+    <script src="script.js?v=5"></script>
 </body>
-</html> 
+</html>
