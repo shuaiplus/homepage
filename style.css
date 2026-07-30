@@ -565,7 +565,7 @@ a, button, input[type="button"], input[type="submit"], .logo, [data-tilt], .trac
         gap: 1.6rem;
     }
 
-    .project-wrapper:last-child {
+    .project-wrapper:nth-child(odd):last-child {
         grid-column: 1 / -1;
         max-width: 520px;
         justify-self: center;
